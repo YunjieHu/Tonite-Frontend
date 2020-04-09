@@ -15,14 +15,12 @@ class RoundedButton extends Component {
         this.setState({ pressed: true });
     }
 
-    onPress = () => { 
-    }
 
     render(){
         return(
 
                 <TouchableHighlight 
-                    onPress={this.onPress}
+                    onPress={this.props.onPress}
                     activeOpacity={1}
                     underlayColor={"#00ac7d"}
                     style={styles.button}

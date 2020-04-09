@@ -6,7 +6,7 @@ import FormInput from "../Components/Auth/FormInput";
 import Notification from "../Components/Auth/Notification";
 import {KeyboardAvoidingView} from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
-import logo from "../assets/Create_an_Account.jpg";
+import logo from "../assets/tonite.png";
 import { signUpAction } from '../Actions';
 import zxcvbn from 'zxcvbn';
 

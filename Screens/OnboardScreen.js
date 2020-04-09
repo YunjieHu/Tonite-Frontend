@@ -1,20 +1,26 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import Button from "../Components/Auth/Button";
-import FormInput from "../Components/Auth/FormInput";
+import CustomRoundedButton from '../Components/General/CustomRoundButton';
 
 class OnboardScreen extends React.Component {
+  signUp = () =>{
+    this.props.navigation.navigate('signup');
+  }
+  
+  login = () =>{
+    this.props.navigation.navigate('login');
+  }
 
-    render() {
+  render() {
         return (
             <View style={styles.container} >
               <View style={styles.form}>
-                <Button label={'LOGIN'}/>
-                <Button label={'REGISTER'}/>
+                <CustomRoundedButton  text='SIGNUP' onPress={this.signUp}/>
+                <CustomRoundedButton  text='LOGIN' onPress={this.login}/>
               </View>
             </View>
         );
-    }
+  }
 }
 
 export default OnboardScreen;

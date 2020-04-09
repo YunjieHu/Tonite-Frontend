@@ -44,6 +44,7 @@ class ProfileScreen extends Component {
         return(
           //future logic for error handling inside here
           <View style={styles.container}>
+            profile
           </View>
         );
     }
