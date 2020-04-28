@@ -6,7 +6,6 @@ import { Provider } from 'react-redux';
 import configureStore from "./Store";
 import  TabBar  from './Components/TabBar/TabBar';
 
-import SplashScreen from './Screens/SplashScreen';
 import onboardScreen from './Screens/OnboardScreen';
 import LoginScreen from './Screens/LoginScreen';
 import SignUpScreen from './Screens/SignUpScreen';
@@ -15,6 +14,9 @@ import ForgotPasswordScreen from './Screens/ForgotPassScreen'
 import HomeScreen from './Screens/HomeScreen';
 import ProfileScreen from './Screens/ProfileScreen';
 import MessengerScreen from './Screens/MessengerScreen';
+
+import * as Facebook from 'expo-facebook';
+
 
 
 const profile = createStackNavigator({
@@ -30,7 +32,6 @@ const AppStackNavigator = createSwitchNavigator({
   loginFlow: { 
     screen: createSwitchNavigator({
       onboard: {screen: onboardScreen },
-      splash: { screen: SplashScreen },
       login:  { screen: LoginScreen  },
       signup: { screen: SignUpScreen },
       forgot: { screen: ForgotPasswordScreen}
