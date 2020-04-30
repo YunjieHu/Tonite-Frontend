@@ -1,8 +1,11 @@
 import React from 'react';
-import { StyleSheet, View, Image } from 'react-native';
-import CustomRoundedButton from '../Components/General/CustomRoundButton';
+import { StyleSheet, View, Image, Text} from 'react-native';
+import Button from "../Components/Auth/Button";
 import * as Facebook from 'expo-facebook';
 import CustomIcon from "../assets/SVG/logo-icon-only.svg";
+import FacebookIcon from "../assets/SVG/Icon-facebook.svg";
+import GoogleIcon from "../assets/SVG/Icon-google.svg";
+import PhoneIcon from "../assets/SVG/Icon-phone.svg"; 
 
 class OnboardScreen extends React.Component {
   constructor(props) {
@@ -65,8 +68,16 @@ class OnboardScreen extends React.Component {
               </View>
               <CustomIcon style={styles.logo} width={120} height={120} />
               <View style={styles.form}>
-                <CustomRoundedButton  text='Login With FACEBOOK' onPress={this.facebookLogIn} />
-                <CustomRoundedButton  text='LOGIN' onPress={this.login}/>
+                <Text>hELLO</Text>
+                <Button  label={'Sign in With Facebook'} customStyles={{backgroundColor: 'rgba( 59, 89, 152, 0.8)'}} onPress={this.facebookLogIn} >
+                    <FacebookIcon width={40} height={20} />
+                </Button>
+                <Button  label={'Sign in With Google'} customStyles={{backgroundColor: 'rgba( 222, 82, 70, 1.0)'}} > 
+                    <GoogleIcon width={40} height={20} />
+                </Button>
+                <Button  label={'Sign in with Phone Number'} customStyles={{backgroundColor: 'rgba( 62, 62, 62, 0.8)'}} onPress={this.login}>
+                    <PhoneIcon width={40} height={20} />
+                </Button>
               </View>
             </View>
         );
@@ -100,7 +111,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   form: {
-    width: '80%'
+    width: '90%'
   },
   textStyle:{
     flex:1,

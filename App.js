@@ -1,4 +1,4 @@
-import React from 'react';
+import React , { useState } from 'react';
 import { View, Image, Left} from 'react-native';
 import Icon from "react-native-vector-icons/FontAwesome";
 import { createSwitchNavigator , createBottomTabNavigator, createAppContainer, StackActions,NavigationActions, createStackNavigator } from 'react-navigation';
@@ -16,8 +16,15 @@ import ProfileScreen from './Screens/ProfileScreen';
 import MessengerScreen from './Screens/MessengerScreen';
 
 import * as Facebook from 'expo-facebook';
+import * as Font from 'expo-font';
+import { AppLoading } from 'expo';
 
 
+const fetchFonts = () => {
+  return Font.loadAsync({
+  'avenir-next': require('./assets/fonts/AvenirNext-Regular.ttf')
+  });
+  };
 
 const profile = createStackNavigator({
   profile: {
@@ -94,7 +101,17 @@ const AppStackNavigator = createSwitchNavigator({
 const AppContainer = createAppContainer(AppStackNavigator);
 
 export default function App() {
+  const [dataLoaded, setDataLoaded] = useState(false);
   const store = configureStore();
+  //load in the font
+  if (!dataLoaded) {
+    return (
+      <AppLoading
+        startAsync={fetchFonts}
+        onFinish={() => setDataLoaded(true)}
+      />
+    );
+  }
   return (
     <Provider store={store}>
           <AppContainer />

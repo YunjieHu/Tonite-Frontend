@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 class Button extends React.Component{
     render(){
-        const { disabled, label, onPress } = this.props;
+        const { disabled, label, onPress, customStyles} = this.props;
         const containerStyle = [
           styles.container,
           disabled
@@ -11,8 +11,11 @@ class Button extends React.Component{
             : styles.containerEnabled
         ];
         return(
-        <TouchableOpacity style={containerStyle}  onPress={onPress} disabled={disabled}>
+        <TouchableOpacity style={[containerStyle, customStyles]} onPress={onPress} disabled={disabled}>
+          <View style={styles.btnContainer}>
+            {this.props.children}
             <Text style={styles.textStyles}>{label}</Text>
+          </View>
         </TouchableOpacity>
         );
     }
@@ -21,14 +24,10 @@ class Button extends React.Component{
 const styles = StyleSheet.create({
     container: {
       width: '100%',
-      alignItems: 'center',
-      justifyContent: 'center',
       backgroundColor: '#F5FFFA',
       marginBottom: 12,
-      paddingVertical: 12,
-      borderRadius: 4,
-      borderWidth: StyleSheet.hairlineWidth,
-      borderColor:"rgba(255,255,255,0.7)"
+      paddingVertical: 16,
+      borderRadius:5,
     },
     containerEnabled: {
       opacity: 1
@@ -36,11 +35,15 @@ const styles = StyleSheet.create({
     containerDisabled: {
       opacity: 0.3
     },
+    btnContainer:{
+      flexDirection: "row",
+      alignItems: 'center',
+    },
     textStyles: {
-      color: 'black',
+      flex: 0.9, 
+      color: '#fff',
       textAlign:'center',
-      height: 20
-    }
+    },
   });
 
   export default Button;

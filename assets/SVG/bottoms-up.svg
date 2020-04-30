@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="58" height="58" viewBox="0 0 58 58">
+  <g id="Group_74" data-name="Group 74" transform="translate(-151 -281)">
+    <g id="Ellipse_56" data-name="Ellipse 56" transform="translate(151 281)" fill="none" stroke="#e83a5c" stroke-width="4">
+      <circle cx="29" cy="29" r="29" stroke="none"/>
+      <circle cx="29" cy="29" r="27" fill="none"/>
+    </g>
+    <path id="Icon_awesome-wine-glass-alt" data-name="Icon awesome-wine-glass-alt" d="M13.078,28.094H10.656V21A8.758,8.758,0,0,0,17.4,11.664L16.435.881A.96.96,0,0,0,15.484,0H1.953A.96.96,0,0,0,1,.881L.036,11.665A8.758,8.758,0,0,0,6.781,21v7.095H4.359a2.422,2.422,0,0,0-2.422,2.422A.484.484,0,0,0,2.422,31H15.016a.484.484,0,0,0,.484-.484A2.422,2.422,0,0,0,13.078,28.094ZM3.739,2.906H13.7l.434,4.844H3.3Z" transform="translate(171 296)" fill="#282e34"/>
+  </g>
+</svg>

@@ -11,7 +11,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/loading-screen-bg-with-logo.png",
+      "image": "./assets/tonite-lg.png",
       "resizeMode": "cover",
       "backgroundColor": "#222433"
     },
