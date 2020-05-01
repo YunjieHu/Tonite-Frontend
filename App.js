@@ -22,7 +22,8 @@ import { AppLoading } from 'expo';
 
 const fetchFonts = () => {
   return Font.loadAsync({
-  'avenir-next': require('./assets/fonts/AvenirNext-Regular.ttf')
+  'avenir-next': require('./assets/fonts/AvenirNext-Regular.ttf'),
+  'avenir-next-bold': require('./assets/fonts/AvenirNext-Bold.ttf'),
   });
   };
 

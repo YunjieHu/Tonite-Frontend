@@ -66,9 +66,16 @@ class OnboardScreen extends React.Component {
               <View style={styles.backgroundContainer}>
                     <Image style={styles.backgroundImage} source={require('../assets/sign-in-bg.png')} />
               </View>
-              <CustomIcon style={styles.logo} width={120} height={120} />
+              <View style={styles.logoContainer}>
+              <CustomIcon style={styles.logo} width={90} height={90} />
+              <Text style={styles.heading}>tonite</Text>
+              </View>
               <View style={styles.form}>
-                <Text>hELLO</Text>
+                <View style={styles.textStyle}>
+                  <Text 
+                  style={styles.formPrompt}
+                  >Create Your Account</Text>
+                </View>
                 <Button  label={'Sign in With Facebook'} customStyles={{backgroundColor: 'rgba( 59, 89, 152, 0.8)'}} onPress={this.facebookLogIn} >
                     <FacebookIcon width={40} height={20} />
                 </Button>
@@ -78,6 +85,11 @@ class OnboardScreen extends React.Component {
                 <Button  label={'Sign in with Phone Number'} customStyles={{backgroundColor: 'rgba( 62, 62, 62, 0.8)'}} onPress={this.login}>
                     <PhoneIcon width={40} height={20} />
                 </Button>
+                <View style={styles.textStyle}>
+                  <Text 
+                  style={styles.formPrompt}
+                  >Trouble Logging In?</Text>
+                </View>
               </View>
             </View>
         );
@@ -106,15 +118,35 @@ const styles = StyleSheet.create({
     height: null,
     resizeMode: 'cover'
   },
+  logoContainer:{
+    flex: 1,
+    justifyContent:'flex-end'
+  },
   logo: {
     flex:1,
     alignSelf: 'center',
   },
+  heading:{
+    fontFamily: 'avenir-next-bold', 
+    fontSize: 48,
+    color: '#F5FFFA',
+    paddingBottom: 40,
+    textAlign:'center'
+  },
   form: {
-    width: '90%'
+    width: '90%',
+    flex: 0.9,
+    justifyContent:'flex-start'
+  },
+  formPrompt:{
+    color: '#F5FFFA',
+    textAlign:'center',
+    fontFamily: 'avenir-next', 
+    fontSize: 15,
+    textDecorationLine: 'underline',
+    textDecorationStyle: 'dotted',
+    marginBottom: 30,
   },
   textStyle:{
-    flex:1,
-    justifyContent:'center',
   },
 });
