@@ -57,7 +57,7 @@ class OnboardScreen extends React.Component {
   }
   
   login = () =>{
-    this.props.navigation.navigate('login');
+    this.props.navigation.navigate('PhoneAuth');
   }
 
   render() {
