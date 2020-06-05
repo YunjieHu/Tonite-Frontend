@@ -12,8 +12,10 @@ class Button extends React.Component{
         ];
         return(
         <TouchableOpacity style={[containerStyle, customStyles]} onPress={onPress} disabled={disabled}>
-          <View style={styles.btnContainer}>
-            {this.props.children}
+          <View style={styles.btnContainer}> 
+          <View style={{paddingLeft: 10}}> 
+            {this.props.children} 
+          </View>
             <Text style={styles.textStyles}>{label}</Text>
           </View>
         </TouchableOpacity>
@@ -37,12 +39,12 @@ const styles = StyleSheet.create({
     },
     btnContainer:{
       flexDirection: "row",
-      alignItems: 'center',
     },
     textStyles: {
-      flex: 0.9, 
+      flex:1,
       color: '#fff',
       textAlign:'center',
+      marginLeft: -10
     },
   });
 

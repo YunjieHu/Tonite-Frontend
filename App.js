@@ -1,17 +1,16 @@
 import React , { useState } from 'react';
-import { View, Image, Left} from 'react-native';
 import Icon from "react-native-vector-icons/FontAwesome";
 import { createSwitchNavigator , createBottomTabNavigator, createAppContainer, StackActions,NavigationActions, createStackNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
 import configureStore from "./Store";
 import  TabBar  from './Components/TabBar/TabBar';
-import { HeaderBackButton } from 'react-navigation';
 
 import onboardScreen from './Screens/OnboardScreen';
-import LoginScreen from './Screens/LoginScreen';
 import PhoneAuthScreen from './Screens/PhoneAuthScreen';
-import PhoneVerifScreen from './Screens/PhoneVerifScreen'
-import SignUpScreen from './Screens/SignUpScreen';
+import PhoneVerifScreen from './Screens/PhoneVerifScreen';
+import EmailAuthScreen from './Screens/EmailAuthScreen';
+import TransitionScreen from './Screens/TransitionScreen';
+import RegistrationScreen from './Screens/RegistrationScreen';
 import ForgotPasswordScreen from './Screens/ForgotPassScreen'
 
 import HomeScreen from './Screens/HomeScreen';
@@ -54,14 +53,53 @@ const AppStackNavigator = createSwitchNavigator({
               backgroundColor: 'transparent',
             },
             headerLeft: (
-              <HeaderBackButton
-                  onPress={() => navigation.navigate('onboard')}
-              />
+              <Icon name={'chevron-left'} style={{marginLeft: 10}} size={22}  onPress={() => navigation.navigate('onboard')}/>
+
             )
           }) 
-        }
+        },
+        PhoneVerif: {
+          screen:PhoneVerifScreen,
+          navigationOptions: ({ navigation: { goBack }  }) => ({
+            headerStyle: {
+              elevation: 0,
+              shadowOpacity: 0,
+              borderBottomWidth: 0,
+              backgroundColor: 'transparent',
+            },
+            headerLeft: (
+              <Icon name={'chevron-left'} style={{marginLeft: 10}} size={22}  onPress={() => goBack()}/>
+            )
+          }) 
+        },EmailAuth: {
+          screen:EmailAuthScreen,
+          navigationOptions: ({ navigation }) => ({
+            headerStyle: {
+              elevation: 0,
+              shadowOpacity: 0,
+              borderBottomWidth: 0,
+              backgroundColor: 'transparent',
+            },
+            headerLeft: (
+              <Icon name={'chevron-left'} style={{marginLeft: 10}} size={22}  onPress={() => navigation.navigate('onboard')}/>
+            )
+          }) 
+        },
       }),
-      signup: { screen: SignUpScreen },
+      signup: createStackNavigator({ 
+        Transition: {
+          screen:TransitionScreen, 
+          navigationOptions: {
+            header: null,
+          } 
+        },
+        Register: {
+          screen:RegistrationScreen, 
+          navigationOptions: {
+            header: null,
+          } 
+        },
+      }),
       forgot: { screen: ForgotPasswordScreen}
     })
   },

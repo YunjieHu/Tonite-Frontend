@@ -71,9 +71,13 @@ class PhoneAuthScreen extends React.Component {
         }
     }
 
+    submit = () =>{
+        this.props.navigation.navigate('PhoneVerif');
+      }
+
     render() {
         const { phone } = this.state;
-        const countryData = data
+        const countryData = data;
         return(
             <KeyboardAvoidingView style={styles.container} behavior={"padding"} >
                 <Modal
@@ -88,7 +92,7 @@ class PhoneAuthScreen extends React.Component {
                         keyExtractor={(item, index) => index.toString()}
                         renderItem={
                         ({ item }) =>
-                            <TouchableWithoutFeedback onPress={() =>       this.selectCountry(item.name)}>
+                            <TouchableWithoutFeedback onPress={() => this.selectCountry(item.name)}>
                             <View style={styles.countryStyle}>
                                 <Text style={styles.textStyle}>
                                 {item.flag} {item.name} ({item.dial_code})
@@ -117,7 +121,7 @@ class PhoneAuthScreen extends React.Component {
                     dataDetectorTypes='phoneNumber'  onChangeText={this.handlePhoneChange} keyboardType={'phone-pad'} ref={this.phoneRef}/>
                 </View>
                 <Text style={styles.tooltip} >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </Text>
-                <Button  label={'Continue'} customStyles={{ width: '90%', fontFamily: 'avenir-next', backgroundColor: 'rgba( 255, 55, 95, 1.0)'}}></Button>
+                <Button  onPress={() => this.submit()} label={'Continue'} customStyles={{ width: '90%', fontFamily: 'avenir-next', backgroundColor: 'rgba( 255, 55, 95, 1.0)'}} disabled={!phone} ></Button>
             </KeyboardAvoidingView>
         );
     }

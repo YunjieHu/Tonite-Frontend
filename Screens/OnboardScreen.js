@@ -77,20 +77,19 @@ class OnboardScreen extends React.Component {
                   >Create Your Account</Text>
                 </View>
                 <Button  label={'Sign in With Facebook'} customStyles={{backgroundColor: 'rgba( 59, 89, 152, 0.8)'}} onPress={this.facebookLogIn} >
-                    <FacebookIcon width={40} height={20} />
+                    <FacebookIcon width={20} height={20} />
                 </Button>
                 <Button  label={'Sign in With Google'} customStyles={{backgroundColor: 'rgba( 222, 82, 70, 1.0)'}} > 
-                    <GoogleIcon width={40} height={20} />
+                    <GoogleIcon width={20} height={20} />
                 </Button>
                 <Button  label={'Sign in with Phone Number'} customStyles={{backgroundColor: 'rgba( 62, 62, 62, 0.8)'}} onPress={this.login}>
-                    <PhoneIcon width={40} height={20} />
+                    <PhoneIcon width={20} height={20} />
                 </Button>
-                <View style={styles.textStyle}>
+
                   <Text 
                   style={styles.formPrompt}
                   >Trouble Logging In?</Text>
                 </View>
-              </View>
             </View>
         );
   }
@@ -146,7 +145,5 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
     textDecorationStyle: 'dotted',
     marginBottom: 30,
-  },
-  textStyle:{
   },
 });
