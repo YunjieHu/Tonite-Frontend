@@ -26,6 +26,7 @@ const fetchFonts = () => {
   return Font.loadAsync({
   'avenir-next': require('./assets/fonts/AvenirNext-Regular.ttf'),
   'avenir-next-bold': require('./assets/fonts/AvenirNext-Bold.ttf'),
+  'avenir-next-italic': require('./assets/fonts/AvenirNext-Italic.ttf'),
   });
   };
 

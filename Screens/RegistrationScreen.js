@@ -1,10 +1,12 @@
 import React from 'react';
-import {  Platform, View, Text, TextInput, StyleSheet } from 'react-native';
+import {  Platform, View, Text, TextInput, StyleSheet,} from 'react-native';
+import HideWithKeyboard from 'react-native-hide-with-keyboard';
 import Icon from "react-native-vector-icons/FontAwesome";
 import Button from '../Components/Auth/Button.js';
 import Step1 from '../Components/Auth/Step1.js';
 import Step2 from '../Components/Auth/Step2.js';
 import Step3 from '../Components/Auth/Step3.js';
+import Dots from 'react-native-dots-pagination';
 
 class RegistrationScreen extends React.Component {
     constructor(props) {
@@ -12,16 +14,18 @@ class RegistrationScreen extends React.Component {
         // Set the initial input values
         this.state = {
           currentStep: 1, // Default is Step 1
-          firstName: '',
-          lastName: '',
-          gender: '', 
+          firstName: '', //string
+          lastName: '', //string
+          gender: 1,  //default is 1, max is 2, lowest is 0
         }
 
       }
 
       handleChange = input => event => {
         this.setState({ [input] :event.nativeEvent.text })
-        console.log(this.state.firstName)
+      }
+      handleSelect = (input, value) => {
+        this.setState({ [input] : value })
       }
 
       _next() {
@@ -75,25 +79,30 @@ class RegistrationScreen extends React.Component {
         const values= {firstName, lastName, gender}
         return (
           <>
+          <HideWithKeyboard>
           <View style={{ height: 80, marginTop: 20}}>
             {this.previousButton}
           </View>
+          </HideWithKeyboard>
           <View style={styles.container}>
             <Step1 
               currentStep={this.state.currentStep} 
               handleChange={this.handleChange}
+              handleSelect = {this.handleSelect}
               values={values}
             />
             <Step2 
               currentStep={this.state.currentStep} 
-              handleChange={this.handleChange}
+              handleSelect = {this.handleSelect}
             />
             <Step3 
               currentStep={this.state.currentStep} 
-              handleChange={this.handleChange}
+              handleSelect = {this.handleSelect}
             />
+            <HideWithKeyboard>
             {this.nextButton} 
-            <Text>{this.state.currentStep}</Text>
+            <Dots length={3} active={this.state.currentStep-1} passiveDotWidth={8} activeDotWidth={10}  passiveDotHeight={8} activeDotHeight={10} activeColor={'rgba( 255, 55, 95, 1.0)'} />
+            </HideWithKeyboard>
           </View>
           </>
         )
@@ -104,7 +113,7 @@ const styles = StyleSheet.create({
   container: {
    flex:1,
    backgroundColor: '#FFF',
-   justifyContent: 'flex-start',
+   justifyContent: 'flex-end',
   },
   left:{
     marginLeft: 10,
