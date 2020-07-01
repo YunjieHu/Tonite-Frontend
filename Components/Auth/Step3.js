@@ -1,33 +1,54 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView} from 'react-native';
+import {ButtonGroup} from 'react-native-elements';
+import InfoIcon from "../../assets/SVG/gender-neutral.svg";
 
 class Step3 extends React.Component {
-    render() {
-      if (this.props.currentStep !== 3) { // Prop: The current step
-        return null
-      }
-      // The markup for the Step 3 UI
-      return(
-        <View style={styles.container} >
-            <Text>step 3</Text>
-        </View>
-      )
+
+  updateIndex (selectedIndex) {
+      this.props.handleSelect('preference', selectedIndex)
+  }
+  render() {
+    const { pref } = this.props;
+    if (this.props.currentStep !== 3) { // Prop: The current step
+      return null
     }
+    const buttons = ['♂ Men', '♀ Women', 'Everyone' ]
+    // The markup for the first name, last name and gender of the UI
+    return(
+          <SafeAreaView style={styles.container}>
+         <View style = {styles.form}>
+            <View style={styles.logoContainer}>
+              <InfoIcon style={styles.logo} width={50} height={50} />
+            </View>
+            <Text style = {styles.heading}>Who Are You Looking For?</Text>
+            <ButtonGroup
+              selectedIndex={pref}
+              onPress={this.updateIndex.bind(this)}
+              buttons={buttons}
+              containerStyle={styles.buttonGroup}
+              innerBorderStyle={styles.border}
+              textStyle={styles.text}
+              selectedButtonStyle={styles.selected}
+              selectedTextStyle={{color: 'rgba( 255, 55, 95, 1.0)',}}
+          ></ButtonGroup>
+          </View>
+          </SafeAreaView>
+    )
+  }
 }
+
+export default Step3;
 
 const styles = StyleSheet.create({
   container: {
    flex:1,
-   backgroundColor: '#FFF',
-   justifyContent: 'flex-start',
    alignItems:'center'
   },
   form:{
+    flex:1,
      width: '90%',
-     flexDirection: 'row',
-     justifyContent: 'center',
-     alignItems: 'center',
-     marginBottom: 20,
+     justifyContent: "flex-start"
   },
   heading:{
       width: '100%',
@@ -35,38 +56,38 @@ const styles = StyleSheet.create({
       fontSize: 30,
       color: '#000',
       paddingBottom: 20,
-      paddingHorizontal: 15,
       textAlign:'left'
   },
-  body:{
+  body:{ 
       width: '100%',
       fontFamily: 'avenir-next', 
       fontSize: 16,
       color: '#000',
-      paddingHorizontal: 15,
       textAlign:'left'
   },
-  infoContainer:{
-      flex: 0.3
+  logoContainer:{
+    justifyContent:'flex-start',
+    alignSelf:'flex-start',
   },
-  info:{
-      fontFamily: 'avenir-next', 
-      fontSize: 20,
+  buttonGroup:{
+    flexDirection:'column',
+    flex: 0.6,
+    borderRadius: 7,
   },
-  tooltip:{
-      fontFamily: 'avenir-next', 
-      fontSize: 13,
-      color: 'rgba( 152, 152, 157, 1.0)',
-      width: '90%',
-      paddingBottom: 16
+  text: {
+    fontSize: 17,
+    color:'rgba( 152, 152, 157, 1.0)',
+    fontWeight:'600',
   },
-  phoneNumberText:{
-      flex:1,
-      borderColor: 'rgba( 255, 55, 95, 1.0)', 
-      borderBottomWidth: 1.2,
-      fontFamily: 'avenir-next', 
-      fontSize: 19,
-  }
+  border:{
+    color:"transparent",
+    borderRadius: 10,
+    marginVertical: 20
+  },
+  selected:{
+    backgroundColor:'transparent',
+    borderColor: 'rgba( 255, 55, 95, 1.0)',
+    borderWidth: 1.2,
+    borderRadius: 7,
+ }
 });
-
-export default Step3;

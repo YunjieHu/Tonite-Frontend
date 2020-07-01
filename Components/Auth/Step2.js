@@ -1,33 +1,49 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView} from 'react-native';
+import InfoIcon from "../../assets/SVG/cake.svg";
 
 class Step2 extends React.Component {
-    render() {
-      if (this.props.currentStep !== 2) { // Prop: The current step
-        return null
-      }
-      // The markup for the Step 2 UI
-      return(
-        <View style={styles.container} >
-            <Text>step 2</Text>
-        </View>
-      )
-    }
+  constructor(props){
+    super(props)
 }
+
+
+setDate(date) {
+  this.props.handleSelect('birthday', date)
+}
+
+render() {
+  const { date } = this.props;
+  if (this.props.currentStep !== 2) { // Prop: The current step
+    return null
+  }
+  // The markup for the first name, last name and gender of the UI
+  return(
+      <SafeAreaView style={styles.container}>
+        <View style = {styles.form}>
+            <View style={styles.logoContainer}>
+              <InfoIcon style={styles.logo} width={50} height={50} />
+            </View>
+            <Text style = {styles.heading}>When's Your Birthday?</Text>
+            <Text style = {styles.body}>You can't edit this later, so make sure you get it right!</Text>
+          </View>
+      </SafeAreaView>
+  )
+}
+}
+
+
+export default Step2;
 
 const styles = StyleSheet.create({
   container: {
    flex:1,
-   backgroundColor: '#FFF',
-   justifyContent: 'flex-start',
    alignItems:'center'
   },
   form:{
+    flex:1,
      width: '90%',
-     flexDirection: 'row',
-     justifyContent: 'center',
-     alignItems: 'center',
-     marginBottom: 20,
+     justifyContent: "flex-start"
   },
   heading:{
       width: '100%',
@@ -35,38 +51,25 @@ const styles = StyleSheet.create({
       fontSize: 30,
       color: '#000',
       paddingBottom: 20,
-      paddingHorizontal: 15,
       textAlign:'left'
   },
-  body:{
+  subheading:{
+    width: '100%',
+    fontFamily: 'avenir-next-bold', 
+    fontSize: 15,
+    color: '#000',
+    paddingBottom: 10,
+    textAlign:'left'
+  },
+  body:{ 
       width: '100%',
       fontFamily: 'avenir-next', 
       fontSize: 16,
       color: '#000',
-      paddingHorizontal: 15,
       textAlign:'left'
   },
-  infoContainer:{
-      flex: 0.3
+  logoContainer:{
+    justifyContent:'flex-start',
+    alignSelf:'flex-start'
   },
-  info:{
-      fontFamily: 'avenir-next', 
-      fontSize: 20,
-  },
-  tooltip:{
-      fontFamily: 'avenir-next', 
-      fontSize: 13,
-      color: 'rgba( 152, 152, 157, 1.0)',
-      width: '90%',
-      paddingBottom: 16
-  },
-  phoneNumberText:{
-      flex:1,
-      borderColor: 'rgba( 255, 55, 95, 1.0)', 
-      borderBottomWidth: 1.2,
-      fontFamily: 'avenir-next', 
-      fontSize: 19,
-  }
 });
-
-export default Step2;

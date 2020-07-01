@@ -2,13 +2,8 @@ import React from 'react';
 import { View, Text, StyleSheet, TextInput, Keyboard, KeyboardAvoidingView, SafeAreaView, TouchableWithoutFeedback} from 'react-native';
 import {ButtonGroup} from 'react-native-elements';
 import InfoIcon from "../../assets/SVG/info.svg";
-import HideWithKeyboard from 'react-native-hide-with-keyboard';
 
 class Step1 extends React.Component {
-    constructor(props){
-        super(props)
-        this.updateIndex = this.updateIndex.bind(this)
-    }
 
     updateIndex (selectedIndex) {
         this.props.handleSelect('gender', selectedIndex)
@@ -78,7 +73,7 @@ const styles = StyleSheet.create({
   form:{
     flex:1,
      width: '90%',
-     justifyContent: "flex-end"
+     justifyContent: "flex-start"
   },
   heading:{
       width: '100%',
@@ -93,6 +88,7 @@ const styles = StyleSheet.create({
     fontFamily: 'avenir-next-bold', 
     fontSize: 15,
     color: '#000',
+    paddingTop: 20,
     paddingBottom: 10,
     textAlign:'left'
   },
@@ -104,7 +100,7 @@ const styles = StyleSheet.create({
       textAlign:'left'
   },
   logoContainer:{
-    justifyContent:'flex-end',
+    justifyContent:'flex-start',
     alignSelf:'flex-start'
   },
   logo: {

@@ -6,6 +6,7 @@ import Button from '../Components/Auth/Button.js';
 import Step1 from '../Components/Auth/Step1.js';
 import Step2 from '../Components/Auth/Step2.js';
 import Step3 from '../Components/Auth/Step3.js';
+import Step4 from '../Components/Auth/Step4.js';
 import Dots from 'react-native-dots-pagination';
 
 class RegistrationScreen extends React.Component {
@@ -17,6 +18,9 @@ class RegistrationScreen extends React.Component {
           firstName: '', //string
           lastName: '', //string
           gender: 1,  //default is 1, max is 2, lowest is 0
+          birthday: '2016-05-15', //date
+          preference:1, //default is 1
+          photos: [],
         }
 
       }
@@ -31,7 +35,7 @@ class RegistrationScreen extends React.Component {
       _next() {
         let currentStep = this.state.currentStep
         // If the current step is 1 or 2, then add one on "next" button click
-        currentStep = currentStep >= 2? 3: currentStep + 1
+        currentStep = currentStep >= 3? 4: currentStep + 1
         this.setState({
           currentStep: currentStep
         })
@@ -39,7 +43,7 @@ class RegistrationScreen extends React.Component {
         
       _prev() {
         let currentStep = this.state.currentStep
-        // If the current step is 2 or 3, then subtract one on "previous" button click
+        // If the current step is 2,  3 or 4, then subtract one on "previous" button click
         currentStep = currentStep <= 1? 1: currentStep - 1
         this.setState({
           currentStep: currentStep
@@ -62,21 +66,22 @@ class RegistrationScreen extends React.Component {
       
       get nextButton(){
         let currentStep = this.state.currentStep;
-        // If the current step is not 3, then render the "next" button
-        if(currentStep <3){
+        // If the current step is not 4, then render the "next" button
+        if(currentStep <4){
           return (
             <Button  onPress={() => this._next()} label={'Continue'} customStyles={{ alignSelf:'center', width: '90%', fontFamily: 'avenir-next', backgroundColor: 'rgba( 255, 55, 95, 1.0)'}} ></Button>  
           )
         }
         // ...else render nothing
         return (
-          <Button label={'Continue'} customStyles={{ width: '90%', fontFamily: 'avenir-next', backgroundColor: 'rgba( 255, 55, 95, 1.0)'}} ></Button>  
+          <Button label={'Continue'} customStyles={{ alignSelf:'center', width: '90%', fontFamily: 'avenir-next', backgroundColor: 'rgba( 255, 55, 95, 1.0)'}} ></Button>  
         );
       }
       // Render UI will go here...
       render() {   
-        const {firstName, lastName, gender } = this.state; 
-        const values= {firstName, lastName, gender}
+        const {firstName, lastName, gender, birthday, preference, photos } = this.state; 
+        const values= {firstName, lastName, gender};
+        console.log(this.state.photos);
         return (
           <>
           <HideWithKeyboard>
@@ -94,14 +99,21 @@ class RegistrationScreen extends React.Component {
             <Step2 
               currentStep={this.state.currentStep} 
               handleSelect = {this.handleSelect}
+              date = {birthday}
             />
             <Step3 
               currentStep={this.state.currentStep} 
               handleSelect = {this.handleSelect}
+              pref = {preference}
+            />
+            <Step4 
+              currentStep={this.state.currentStep} 
+              handleSelect = {this.handleSelect}
+              photos = {photos}
             />
             <HideWithKeyboard>
             {this.nextButton} 
-            <Dots length={3} active={this.state.currentStep-1} passiveDotWidth={8} activeDotWidth={10}  passiveDotHeight={8} activeDotHeight={10} activeColor={'rgba( 255, 55, 95, 1.0)'} />
+            <Dots length={4} active={this.state.currentStep-1} passiveDotWidth={9} activeDotWidth={10}  passiveDotHeight={9} activeDotHeight={10} activeColor={'rgba( 255, 55, 95, 1.0)'} />
             </HideWithKeyboard>
           </View>
           </>
