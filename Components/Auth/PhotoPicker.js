@@ -14,7 +14,7 @@ class PhotoPicker extends React.Component {
         let result = await ImagePicker.launchImageLibraryAsync({
           mediaTypes: 'Images',
           allowsEditing: true,
-          aspect: [1, 1]
+          aspect: [4, 5]
         });
         if (!result.cancelled) {
           this.props.addImage(result.uri);

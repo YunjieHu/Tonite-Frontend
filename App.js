@@ -11,7 +11,8 @@ import PhoneVerifScreen from './Screens/PhoneVerifScreen';
 import EmailAuthScreen from './Screens/EmailAuthScreen';
 import TransitionScreen from './Screens/TransitionScreen';
 import RegistrationScreen from './Screens/RegistrationScreen';
-import ForgotPasswordScreen from './Screens/ForgotPassScreen'
+import ForgotPasswordScreen from './Screens/ForgotPassScreen';
+import CompletionScreen from './Screens/CompletionScreen';
 
 import HomeScreen from './Screens/HomeScreen';
 import ProfileScreen from './Screens/ProfileScreen';
@@ -100,7 +101,14 @@ const AppStackNavigator = createSwitchNavigator({
             header: null,
           } 
         },
+        Complete: {
+          screen:CompletionScreen, 
+          navigationOptions: {
+            header: null,
+          } 
+        },
       }),
+
       forgot: { screen: ForgotPasswordScreen}
     })
   },

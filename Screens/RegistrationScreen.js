@@ -49,6 +49,14 @@ class RegistrationScreen extends React.Component {
           currentStep: currentStep
         })
       }
+
+      _back() {
+        this.props.navigation.navigate('onboard');
+      }
+
+      _end() {
+        this.props.navigation.navigate('Complete');
+      }
       
       get previousButton(){
         let currentStep = this.state.currentStep;
@@ -60,7 +68,7 @@ class RegistrationScreen extends React.Component {
         }
         // ...else return nothing
         return (
-          <Icon name={'chevron-left'} style={styles.left} size={25}  />
+          <Icon name={'chevron-left'} onPress={() => this._back()} style={styles.left} size={25}  />
         );
       }
       
@@ -74,7 +82,7 @@ class RegistrationScreen extends React.Component {
         }
         // ...else render nothing
         return (
-          <Button label={'Continue'} customStyles={{ alignSelf:'center', width: '90%', fontFamily: 'avenir-next', backgroundColor: 'rgba( 255, 55, 95, 1.0)'}} ></Button>  
+          <Button onPress={() => this._end()} label={'Continue'} customStyles={{ alignSelf:'center', width: '90%', fontFamily: 'avenir-next', backgroundColor: 'rgba( 255, 55, 95, 1.0)'}} ></Button>  
         );
       }
       // Render UI will go here...

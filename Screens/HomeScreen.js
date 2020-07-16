@@ -1,6 +1,5 @@
 import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
-import { connect } from 'react-redux';
 import { StackActions,NavigationActions } from 'react-navigation';
 import {AsyncStorage} from 'react-native';
 
@@ -10,16 +9,6 @@ class HomeScreen extends React.Component {
 
     clearAsyncStorage = async() => {
       AsyncStorage.clear();
-    }
-
-    RedirectTest = () => {
-      const resetAction = StackActions.reset({
-        index: 0,
-        actions: [NavigationActions.navigate({ routeName: 'profile' ,params: {
-          profileID: 'DIRECT NAVIGATION',
-        }, })],
-      });
-      this.props.navigation.dispatch(resetAction);
     }
 
     async componentDidMount(){
@@ -73,9 +62,5 @@ class HomeScreen extends React.Component {
     }
   }
 
-  const mapStateToProps = (store) => ({
-    response: store.profile.response,
-    loading:store.profile.loading
-  });
   
-  export default connect(mapStateToProps)(HomeScreen);
+  export default HomeScreen;
