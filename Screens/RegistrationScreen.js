@@ -1,12 +1,14 @@
 import React from 'react';
-import {  Platform, View, Text, TextInput, StyleSheet,} from 'react-native';
+import {  Platform, View, Text, TextInput, Alert, StyleSheet,} from 'react-native';
 import HideWithKeyboard from 'react-native-hide-with-keyboard';
+import * as Location from 'expo-location';
 import Icon from "react-native-vector-icons/FontAwesome";
 import Button from '../Components/Auth/Button.js';
 import Step1 from '../Components/Auth/Step1.js';
 import Step2 from '../Components/Auth/Step2.js';
 import Step3 from '../Components/Auth/Step3.js';
 import Step4 from '../Components/Auth/Step4.js';
+import Step5 from '../Components/Auth/Step5.js';
 import Dots from 'react-native-dots-pagination';
 
 class RegistrationScreen extends React.Component {
@@ -21,6 +23,7 @@ class RegistrationScreen extends React.Component {
           birthday: '2016-05-15', //date
           preference:1, //default is 1
           photos: [],
+          location: ''
         }
 
       }
@@ -35,7 +38,7 @@ class RegistrationScreen extends React.Component {
       _next() {
         let currentStep = this.state.currentStep
         // If the current step is 1 or 2, then add one on "next" button click
-        currentStep = currentStep >= 3? 4: currentStep + 1
+        currentStep = currentStep >= 4? 5: currentStep + 1
         this.setState({
           currentStep: currentStep
         })
@@ -50,12 +53,38 @@ class RegistrationScreen extends React.Component {
         })
       }
 
+
       _back() {
         this.props.navigation.navigate('onboard');
       }
 
-      _end() {
-        this.props.navigation.navigate('Complete');
+      async _end() {
+        let { status } = await Location.requestPermissionsAsync();
+        if (status !== 'granted') {
+          //setErrorMsg('Permission to access location was denied');
+          console.log (status)
+          Alert.alert(
+            "Error",
+            "Denying location permissions may result in limited access!",
+            [
+              {
+                text: "Cancel",
+                style: "cancel"
+              },
+              { text: "OK", onPress: () => this.props.navigation.navigate('Complete') }
+            ],
+            { cancelable: false }
+          );
+        }
+        else{
+          let location = await Location.getCurrentPositionAsync({});
+          this.setState({
+            location: location
+          })
+          //redux call goes here 
+          // then redirect to new page
+          this.props.navigation.navigate('Complete');
+        }
       }
       
       get previousButton(){
@@ -74,22 +103,21 @@ class RegistrationScreen extends React.Component {
       
       get nextButton(){
         let currentStep = this.state.currentStep;
-        // If the current step is not 4, then render the "next" button
-        if(currentStep <4){
+        // If the current step is not 5, then render the "next" button
+        if(currentStep <5){
           return (
             <Button  onPress={() => this._next()} label={'Continue'} customStyles={{ alignSelf:'center', width: '90%', fontFamily: 'avenir-next', backgroundColor: 'rgba( 255, 55, 95, 1.0)'}} ></Button>  
           )
         }
         // ...else render nothing
         return (
-          <Button onPress={() => this._end()} label={'Continue'} customStyles={{ alignSelf:'center', width: '90%', fontFamily: 'avenir-next', backgroundColor: 'rgba( 255, 55, 95, 1.0)'}} ></Button>  
+          <Button onPress={() => this._end()} label={'Enable Location'} customStyles={{ alignSelf:'center', width: '90%', fontFamily: 'avenir-next', backgroundColor: 'rgba( 255, 55, 95, 1.0)'}} ></Button>  
         );
       }
       // Render UI will go here...
       render() {   
         const {firstName, lastName, gender, birthday, preference, photos } = this.state; 
         const values= {firstName, lastName, gender};
-        console.log(this.state.photos);
         return (
           <>
           <HideWithKeyboard>
@@ -119,9 +147,12 @@ class RegistrationScreen extends React.Component {
               handleSelect = {this.handleSelect}
               photos = {photos}
             />
+            <Step5 
+              currentStep={this.state.currentStep} 
+            />
             <HideWithKeyboard>
             {this.nextButton} 
-            <Dots length={4} active={this.state.currentStep-1} passiveDotWidth={9} activeDotWidth={10}  passiveDotHeight={9} activeDotHeight={10} activeColor={'rgba( 255, 55, 95, 1.0)'} />
+            <Dots length={5} active={this.state.currentStep-1} passiveDotWidth={9} activeDotWidth={10}  passiveDotHeight={9} activeDotHeight={10} activeColor={'rgba( 255, 55, 95, 1.0)'} />
             </HideWithKeyboard>
           </View>
           </>

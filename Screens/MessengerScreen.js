@@ -22,7 +22,7 @@ class MessengerScreen extends React.Component {
         return (
             <View style={styles.viewStyles}>
                 <Text style={styles.textStyles}>
-            Message Screen
+                THIS IS A PLACEHOLDER W.I.P
             </Text>
             </View>
         );

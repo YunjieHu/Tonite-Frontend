@@ -7,7 +7,7 @@ import Button from "../Components/Auth/Button";
 
 class CompletionScreen extends React.Component{
     submit = () =>{
-      this.props.navigation.navigate('Register');
+      this.props.navigation.navigate('main');
     }
     render() {
         return (

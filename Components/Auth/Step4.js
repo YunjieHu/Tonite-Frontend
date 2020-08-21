@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, SafeAreaView, Dimensions, Button, Image} from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Dimensions, Image} from 'react-native';
 import * as Permissions from 'expo-permissions';
 import InfoIcon from "../../assets/SVG/photos.svg";
 import PhotoPicker from './PhotoPicker.js'
@@ -16,10 +16,12 @@ class Step4 extends React.Component {
     }
 
     async componentDidMount() {
-      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-      this.setState({ hasCameraPermission: status === "granted" });
      }
 
+    accessRequest = async() => { 
+      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      this.setState({ hasCameraPermission: status === "granted" });
+    }
     addImage = (value) => {
       this.setState({ images : [...this.state.images, value] })
       this.setState({size: this.state.images.length+1});
@@ -50,10 +52,39 @@ class Step4 extends React.Component {
             return null
           }
           if (hasCameraPermission === null) {
-            return <View />
+            this.accessRequest();
+            return (
+              <SafeAreaView style={styles.container}>
+                 <View style = {styles.form}>
+                    <View style={styles.logoContainer}>
+                      <InfoIcon style={styles.logo} width={50} height={50} />
+                    </View>
+                    <Text style = {styles.heading}>Add Your Photos</Text>
+                  </View>
+              </SafeAreaView>
+              );
            }
            else if (hasCameraPermission === false) {
-            return <Text>Access to camera has been denied.</Text>;
+            return (
+              <SafeAreaView style={styles.container}>
+                 <View style = {styles.form}>
+                    <View style={styles.logoContainer}>
+                      <InfoIcon style={styles.logo} width={50} height={50} />
+                    </View>
+                    <Text style = {styles.heading}>Access Denied!</Text>
+                    <Text style = {styles.subheading}>To use Tonite, you'll need to grant access to your device's storage, at least while using the app.</Text>
+                    <Text style = {styles.subheading}>iOS</Text>
+                    <Text style = {styles.body}>Open your iOS settings &gt; Tonite &gt; Storage</Text>
+                    <Text style = {styles.subheading}>Android</Text>
+                    <Text style = {styles.body}>Open your phone's Settings &gt; Apps &gt; Tonite &gt; Permissions &gt; Storage</Text>
+                    <Text style = {styles.subheading}>Alternatively</Text>
+                    <TouchableOpacity style ={styles.errorButton} onPress={() => this.accessRequest()}>
+                       <Text style={styles.errorText}>Try again</Text>
+                    </TouchableOpacity>
+                  </View>
+              </SafeAreaView>
+              )
+            ;
            }
            else {
             return(
@@ -99,6 +130,15 @@ const styles = StyleSheet.create({
       paddingBottom: 20,
       textAlign:'left'
   },
+  subheading:{
+    width: '100%',
+    fontFamily: 'avenir-next-bold', 
+    fontSize: 15,
+    color: '#000',
+    paddingBottom: 8,
+    paddingTop: 4,
+    textAlign:'left'
+  },
   tooltip:{
     width: '100%',
     color: 'rgba( 152, 152, 157, 1.0)',
@@ -122,5 +162,17 @@ const styles = StyleSheet.create({
    flexDirection:'row',
    flex: 1,
    flexWrap:'wrap'
+ },
+ errorButton:{
+   backgroundColor: 'rgba( 255, 55, 95, 1.0)',
+   padding:10,
+   width: 100,
+   borderRadius:5,
+   textAlign: 'center'
+ },
+ errorText:{
+  fontSize:15,
+	color: '#ffffff',
+  textAlign: 'center',
  }
 });

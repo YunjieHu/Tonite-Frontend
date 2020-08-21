@@ -16,7 +16,7 @@ class Step3 extends React.Component {
     const buttons = ['♂ Men', '♀ Women', 'Everyone' ]
     // The markup for the first name, last name and gender of the UI
     return(
-          <SafeAreaView style={styles.container}>
+        <SafeAreaView style={styles.container}>
          <View style = {styles.form}>
             <View style={styles.logoContainer}>
               <InfoIcon style={styles.logo} width={50} height={50} />
@@ -33,7 +33,7 @@ class Step3 extends React.Component {
               selectedTextStyle={{color: 'rgba( 255, 55, 95, 1.0)',}}
           ></ButtonGroup>
           </View>
-          </SafeAreaView>
+        </SafeAreaView>
     )
   }
 }

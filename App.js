@@ -1,9 +1,14 @@
-import React , { useState } from 'react';
+import React , { useState, Component } from 'react';
 import Icon from "react-native-vector-icons/FontAwesome";
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import { createSwitchNavigator , createBottomTabNavigator, createAppContainer, StackActions,NavigationActions, createStackNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
 import configureStore from "./Store";
 import  TabBar  from './Components/TabBar/TabBar';
+
+import AuthLoadingScreen from './Screens/AuthLoadingScreen';
 
 import onboardScreen from './Screens/OnboardScreen';
 import PhoneAuthScreen from './Screens/PhoneAuthScreen';
@@ -17,6 +22,7 @@ import CompletionScreen from './Screens/CompletionScreen';
 import HomeScreen from './Screens/HomeScreen';
 import ProfileScreen from './Screens/ProfileScreen';
 import MessengerScreen from './Screens/MessengerScreen';
+import SettingScreen from './Screens/SettingScreen';
 
 import * as Facebook from 'expo-facebook';
 import * as Font from 'expo-font';
@@ -29,7 +35,7 @@ const fetchFonts = () => {
   'avenir-next-bold': require('./assets/fonts/AvenirNext-Bold.ttf'),
   'avenir-next-italic': require('./assets/fonts/AvenirNext-Italic.ttf'),
   });
-  };
+};
 
 const profile = createStackNavigator({
   profile: {
@@ -41,6 +47,7 @@ const profile = createStackNavigator({
 });
 
 const AppStackNavigator = createSwitchNavigator({
+  Authloading: AuthLoadingScreen,
   loginFlow: { 
     screen: createSwitchNavigator({
       onboard: {screen: onboardScreen },
@@ -119,22 +126,12 @@ const AppStackNavigator = createSwitchNavigator({
         navigationOptions: () => {
           return {
             tabBarIcon: ({ tintColor }) => (
-              <Icon name="home" size={25} color={tintColor} />
+              <MaterialIcon name="person-outline" size={26} color={tintColor} />
             )
           }
         }
       },
-      chat:{
-        screen:MessengerScreen,
-        navigationOptions: () => {
-          return {
-            tabBarIcon: ({ tintColor }) => (
-              <Icon name="comments" size={25} color={tintColor} />
-            )
-          }
-        }
-      },
-      profileTab:{
+      /*profileTab:{
         screen:profile,
         params:{
           profileID:'user'
@@ -142,7 +139,7 @@ const AppStackNavigator = createSwitchNavigator({
         navigationOptions: () => {
           return {
             tabBarIcon: ({ tintColor }) => (
-              <Icon name='user' size={25} color={tintColor} />
+              <MaterialCommunityIcon name='checkbox-multiple-blank-outline' size={25} color={tintColor} />
             ),
               tabBarOnPress: ({ navigation }) => {
                 const resetAction = StackActions.reset({
@@ -155,9 +152,39 @@ const AppStackNavigator = createSwitchNavigator({
               }
           }
         }
-      }
+      }, */
+      matches: {
+        screen:MessengerScreen,
+        navigationOptions: () => {
+          return {
+            tabBarIcon: ({ tintColor }) => (
+              <MaterialCommunityIcon name='checkbox-multiple-blank-outline' size={25} color={tintColor} />
+            )
+          }
+        }
+      },
+      chat:{
+        screen:MessengerScreen,
+        navigationOptions: () => {
+          return {
+            tabBarIcon: ({ tintColor }) => (
+              <MaterialIcon name="chat-bubble-outline" size={25} color={tintColor} />
+            )
+          }
+        }
+      },
+      setting:{
+        screen:SettingScreen,
+        navigationOptions: () => {
+          return {
+            tabBarIcon: ({ tintColor }) => (
+              <SimpleLineIcons name="settings" size={25} color={tintColor} />
+            )
+          }
+        }
+      },
     }, {
-      tabBarOptions: { showLabel: false , activeTintColor: "green", inactiveTintColor: "grey"},
+      tabBarOptions: { showLabel: false , activeTintColor: "red", inactiveTintColor: "grey"},
 
       tabBarComponent: (props) =><TabBar {...props} />,
       } ,
