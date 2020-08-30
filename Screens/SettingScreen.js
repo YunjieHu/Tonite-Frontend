@@ -79,7 +79,7 @@ class SettingScreen extends React.Component {
       for (item of this.state.menu) {
           items.push(
               <>
-              <Accordian 
+              <Accordian key = {item.title}
                   title = {item.title}
                   type = {item.type}
                   data = {item.data}
@@ -133,7 +133,6 @@ class SettingScreen extends React.Component {
       flex: 1,
       backgroundColor: '#FFF',
       justifyContent: 'flex-start',
-      alignItems: 'center',
     },
     toolbar: {
       flexDirection:'row',

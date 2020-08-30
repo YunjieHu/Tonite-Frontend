@@ -21,6 +21,7 @@ import CompletionScreen from './Screens/CompletionScreen';
 
 import HomeScreen from './Screens/HomeScreen';
 import ProfileScreen from './Screens/ProfileScreen';
+import MatchScreen from './Screens/MatchScreen';
 import MessengerScreen from './Screens/MessengerScreen';
 import SettingScreen from './Screens/SettingScreen';
 
@@ -154,7 +155,7 @@ const AppStackNavigator = createSwitchNavigator({
         }
       }, */
       matches: {
-        screen:MessengerScreen,
+        screen:MatchScreen,
         navigationOptions: () => {
           return {
             tabBarIcon: ({ tintColor }) => (
